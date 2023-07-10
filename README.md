@@ -36,13 +36,213 @@ The following mutations are available for performing domain registration operati
 - `updateDomainDNS(id: ID!, dns: [String]!): Domain`: Updates the DNS/nameserver of a domain.
 - `deleteDomain(id: ID!): Domain`: Deletes a domain by its ID.
 - `transferDomain(id: ID!, recipientUsername: String!): Domain`: Transfers a domain from the authenticated user's account to another user's account.
-- 
+
+## GraphQL Examples
+
+### domain(id: ID!): Domain
+
+```graphql
+query {
+  domain(id: "123456") {
+    id
+    name
+    registrant {
+      name
+      email
+    }
+    expirationDate
+    dnsRecords
+  }
+}
+```
+
+### domains: [Domain]
+
+```graphql
+query {
+  domains {
+    id
+    name
+    registrant {
+      name
+      email
+    }
+    expirationDate
+    dnsRecords
+  }
+}
+```
+
+### searchDomains(keyword: String!): [Domain]
+
+```graphql
+query {
+  searchDomains(keyword: "example") {
+    id
+    name
+    registrant {
+      name
+      email
+    }
+    expirationDate
+    dnsRecords
+  }
+}
+
+### checkAvailability(domainName: String!): Boolean
+
+```graphql
+query {
+  checkAvailability(domainName: "example.com")
+}
+```
+
+### myDomains: [Domain]
+
+```graphql
+query {
+  myDomains {
+    id
+    name
+    registrant {
+      name
+      email
+    }
+    expirationDate
+    dnsRecords
+  }
+}
+```
+
+### register(username: String!, password: String!): User
+
+```graphql
+mutation {
+  register(username: "example_user", password: "password") {
+    id
+    username
+  }
+}
+```
+
+### login(username: String!, password: String!): Token
+
+```graphql
+mutation {
+  login(username: "example_user", password: "password") {
+    accessToken
+  }
+}
+```
+
+### registerDomain(input: DomainInput!): Domain
+
+```graphql
+mutation {
+  registerDomain(input: {
+    name: "example.com",
+    registrant: {
+      name: "John Doe",
+      email: "johndoe@example.com"
+    },
+    expirationDate: "2024-07-10",
+    dnsRecords: ["ns1.example.com", "ns2.example.com"]
+  }) {
+    id
+    name
+    registrant {
+      name
+      email
+    }
+    expirationDate
+    dnsRecords
+  }
+}
+```
+
+### updateDomain(id: ID!, input: DomainInput!): Domain
+
+```graphql
+mutation {
+  updateDomain(id: "123456", input: {
+    registrant: {
+      name: "Jane Smith",
+      email: "janesmith@example.com"
+    },
+    expirationDate: "2025-07-10",
+    dnsRecords: ["ns1.updated-example.com", "ns2.updated-example.com"]
+  }) {
+    id
+    name
+    registrant {
+      name
+      email
+    }
+    expirationDate
+    dnsRecords
+  }
+}
+```
+
+### updateDomainDNS(id: ID!, dns: [String]!): Domain
+
+```graphql
+mutation {
+  updateDomainDNS(id: "123456", dns: ["ns1.example.com", "ns2.example.com", "ns3.example.com"]) {
+    id
+    name
+    registrant {
+      name
+      email
+    }
+    expirationDate
+    dnsRecords
+  }
+}
+```
+
+### deleteDomain(id: ID!): Domain
+
+```graphql
+mutation {
+  deleteDomain(id: "123456") {
+    id
+    name
+    registrant {
+      name
+      email
+    }
+    expirationDate
+    dnsRecords
+  }
+}
+```
+
+### transferDomain(id: ID!, recipientUsername: String!): Domain
+
+```graphql
+mutation {
+  transferDomain(id: "123456", recipientUsername: "new_user") {
+    id
+    name
+    registrant {
+      name
+      email
+    }
+    expirationDate
+    dnsRecords
+  }
+}
+```
+
 ## Data Types
 
 The project uses the following data types:
 
-- Domain: Represents a domain with properties such as ID, name, registrant information, expiration date, and DNS records.
-- DomainInput: Input type for creating or updating a domain, including properties such as name, registrant information, expiration date, and DNS records.
+- `User`: Represents a user with properties such as ID and username.
+- `Token`: Represents an authentication token.
+- `Domain`: Represents a domain with properties such as ID, name, registrant information, expiration date, and DNS records.
+- `DomainInput`: Input type for creating or updating a domain, including properties such as name, registrant information, expiration date, and DNS records.
 
 ## Getting Started
 
