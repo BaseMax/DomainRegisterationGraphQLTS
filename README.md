@@ -22,15 +22,21 @@ The following queries are available for retrieving domain information:
 - `domain(id: ID!)`: Domain: Retrieves a domain by its unique ID.
 - `domains: [Domain]`: Retrieves a list of all registered domains.
 - `searchDomains(keyword: String!): [Domain]`: Searches for domains using a keyword.
+- `checkAvailability(domainName: String!): Boolean`: Checks the availability of a domain name.
+- `myDomains: [Domain]`: Retrieves a list of domains registered by the authenticated user.
 
 ## Mutations
 
 The following mutations are available for performing domain registration operations:
 
-- `createDomain(input: DomainInput!)`: Domain: Creates a new domain with the provided registration details.
-- `updateDomain(id: ID!, input: DomainInput!)`: Domain: Updates the details of an existing domain.
+- `register(username: String!, password: String!): User`: Registers a new user with the provided username and password.
+- `login(username: String!, password: String!): Token`: Authenticates a user and returns an access token.
+- `registerDomain(input: DomainInput!): Domain`: Registers a new domain with the provided details.
+- `updateDomain(id: ID!, input: DomainInput!): Domain`: Updates the details of an existing domain.
+- `updateDomainDNS(id: ID!, dns: [String]!): Domain`: Updates the DNS/nameserver of a domain.
 - `deleteDomain(id: ID!): Domain`: Deletes a domain by its ID.
-
+- `transferDomain(id: ID!, recipientUsername: String!): Domain`: Transfers a domain from the authenticated user's account to another user's account.
+- 
 ## Data Types
 
 The project uses the following data types:
