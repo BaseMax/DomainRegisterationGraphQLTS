@@ -19,17 +19,17 @@ The project exposes a single GraphQL endpoint for accessing the domain registrat
 
 The following queries are available for retrieving domain information:
 
-- domain(id: ID!): Domain: Retrieves a domain by its unique ID.
-- domains: [Domain]: Retrieves a list of all registered domains.
-s- earchDomains(keyword: String!): [Domain]: Searches for domains using a keyword.
+- `domain(id: ID!)`: Domain: Retrieves a domain by its unique ID.
+- `domains: [Domain]`: Retrieves a list of all registered domains.
+- `searchDomains(keyword: String!): [Domain]`: Searches for domains using a keyword.
 
 ## Mutations
 
 The following mutations are available for performing domain registration operations:
 
-- createDomain(input: DomainInput!): Domain: Creates a new domain with the provided registration details.
-- updateDomain(id: ID!, input: DomainInput!): Domain: Updates the details of an existing domain.
-- deleteDomain(id: ID!): Domain: Deletes a domain by its ID.
+- `createDomain(input: DomainInput!)`: Domain: Creates a new domain with the provided registration details.
+- `updateDomain(id: ID!, input: DomainInput!)`: Domain: Updates the details of an existing domain.
+- `deleteDomain(id: ID!): Domain`: Deletes a domain by its ID.
 
 ## Data Types
 
