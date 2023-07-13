@@ -13,7 +13,7 @@ DomainRegistrationGraphQLTS is a TypeScript-based project that implements a Grap
 
 The project exposes a single GraphQL endpoint for accessing the domain registration functionality.
 
-**Endpoint: /graphql**
+**Endpoint:** `/graphql`
 
 ## Queries
 
@@ -274,6 +274,7 @@ npm run test:e2e
 ```
 
 This will execute the test suite and provide the test results.
+
 ## Dependencies
 
 The project relies on the following dependencies:
