@@ -248,8 +248,17 @@ To run the DomainRegistrationGraphQLTS project locally, follow these steps:
 - Install the dependencies: `npm install`
 - Build the project: `npm run build`
 - Start the server: `npm start`
-- Once the server is running, you can access the GraphQL API at `http://localhost:3000/graphql`.
+- Once the server is running, you can access the GraphQL API at `http://localhost:4000/graphql`.
 
+## Testing
+
+To run the tests, use the following command:
+
+```shell
+npm run test:e2e
+```
+
+This will execute the test suite and provide the test results.
 ## Dependencies
 
 The project relies on the following dependencies:
