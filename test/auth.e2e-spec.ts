@@ -23,20 +23,6 @@ describe('Auth (e2e)', () => {
 
   beforeAll(async () => {
     await prisma.user.deleteMany();
-
-    const hashPassword = async (password: string) => {
-      const salt = await bcrypt.genSalt(10);
-      return bcrypt.hash(password, salt);
-    };
-
-    await prisma.user.create({
-      data: {
-        email: 'aabc@gmail.com',
-        name: 'testName',
-        username: 'testUsername1',
-        password: await hashPassword('12345678'),
-      },
-    });
   });
 
   afterAll(async () => {
@@ -75,6 +61,20 @@ describe('Auth (e2e)', () => {
   });
 
   it('login user', async () => {
+    const hashPassword = async (password: string) => {
+      const salt = await bcrypt.genSalt(10);
+      return bcrypt.hash(password, salt);
+    };
+
+    await prisma.user.create({
+      data: {
+        email: 'aabc@gmail.com',
+        name: 'testName',
+        username: 'testUsername1',
+        password: await hashPassword('12345678'),
+      },
+    });
+
     const input = {
       username: 'testUsername1',
       password: '12345678',
