@@ -1,0 +1,74 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthPayload {
+  access_token: String!
+}
+
+type User {
+  id: Int!
+  name: String!
+  email: String
+  username: String!
+  domains: [Domain!]!
+}
+
+type Domain {
+  id: Int!
+  name: String!
+  expirationDate: DateTime!
+  dnsRecords: [String!]!
+  registrant: User!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  myDomains: [Domain!]!
+  searchDomains(keyword: String!): [Domain!]!
+  checkAvailability(domain: String!): Domain!
+  domains: [Domain!]!
+  domain(id: Int!): Domain!
+  user(id: Int!): User!
+}
+
+type Mutation {
+  register(registerInput: RegisterInput!): AuthPayload!
+  login(loginInput: LoginInput!): AuthPayload!
+  updateDomainDNS(id: Int!, dns: [String!]!): Domain!
+  registerDomain(registerDomainInput: RegisterDomainInput!): Domain!
+  updateDomain(id: Int!, updateDomainInput: UpdateDomainInput!): Domain!
+  deleteDomain(id: Int!): Domain!
+  transferDomain(id: Int!, recipientUsername: String!): Domain!
+  removeUser(id: Int!): User!
+}
+
+input RegisterInput {
+  name: String!
+  username: String!
+  email: String
+  password: String!
+}
+
+input LoginInput {
+  username: String!
+  password: String!
+}
+
+input RegisterDomainInput {
+  name: String!
+  userId: Int!
+  expirationDate: DateTime!
+  dnsRecords: [String!]!
+}
+
+input UpdateDomainInput {
+  name: String
+  userId: Int
+  expirationDate: DateTime
+  dnsRecords: [String!]
+}
