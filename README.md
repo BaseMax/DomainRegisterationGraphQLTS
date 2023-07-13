@@ -88,6 +88,7 @@ query {
     dnsRecords
   }
 }
+```
 
 ### checkAvailability(domainName: String!): Boolean
 
@@ -141,10 +142,7 @@ mutation {
 mutation {
   registerDomain(input: {
     name: "example.com",
-    registrant: {
-      name: "John Doe",
-      email: "johndoe@example.com"
-    },
+    userId: 1,
     expirationDate: "2024-07-10",
     dnsRecords: ["ns1.example.com", "ns2.example.com"]
   }) {
@@ -165,10 +163,7 @@ mutation {
 ```graphql
 mutation {
   updateDomain(id: "123456", input: {
-    registrant: {
-      name: "Jane Smith",
-      email: "janesmith@example.com"
-    },
+    userId: 1,
     expirationDate: "2025-07-10",
     dnsRecords: ["ns1.updated-example.com", "ns2.updated-example.com"]
   }) {
