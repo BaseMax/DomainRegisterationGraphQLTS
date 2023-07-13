@@ -22,17 +22,17 @@ The following queries are available for retrieving domain information:
 - `domain(id: ID!)`: Domain: Retrieves a domain by its unique ID.
 - `domains: [Domain]`: Retrieves a list of all registered domains.
 - `searchDomains(keyword: String!): [Domain]`: Searches for domains using a keyword.
-- `checkAvailability(domainName: String!): Boolean`: Checks the availability of a domain name.
+- `checkAvailability(domain: String!): Boolean`: Checks the availability of a domain name.
 - `myDomains: [Domain]`: Retrieves a list of domains registered by the authenticated user.
 
 ## Mutations
 
 The following mutations are available for performing domain registration operations:
 
-- `register(username: String!, password: String!): User`: Registers a new user with the provided username and password.
+- `register(name: String!, username: String!, password: String!): User`: Registers a new user with the provided username and password.
 - `login(username: String!, password: String!): Token`: Authenticates a user and returns an access token.
-- `registerDomain(input: DomainInput!): Domain`: Registers a new domain with the provided details.
-- `updateDomain(id: ID!, input: DomainInput!): Domain`: Updates the details of an existing domain.
+- `registerDomain(registerDomainInput: DomainInput!): Domain`: Registers a new domain with the provided details.
+- `updateDomain(id: ID!, updateDomainInput: DomainInput!): Domain`: Updates the details of an existing domain.
 - `updateDomainDNS(id: ID!, dns: [String]!): Domain`: Updates the DNS/nameserver of a domain.
 - `deleteDomain(id: ID!): Domain`: Deletes a domain by its ID.
 - `transferDomain(id: ID!, recipientUsername: String!): Domain`: Transfers a domain from the authenticated user's account to another user's account.
@@ -94,7 +94,16 @@ query {
 
 ```graphql
 query {
-  checkAvailability(domainName: "example.com")
+  checkAvailability(domain: "example.com") {
+    id
+    name
+    registrant {
+      name
+      email
+    }
+    expirationDate
+    dnsRecords
+  }
 }
 ```
 
@@ -119,9 +128,12 @@ query {
 
 ```graphql
 mutation {
-  register(username: "example_user", password: "password") {
-    id
-    username
+  register(registerInput:‌ {
+    name: "name",
+    username: "example_user",
+    password: "password"
+  }) {
+    access_token
   }
 }
 ```
@@ -130,8 +142,11 @@ mutation {
 
 ```graphql
 mutation {
-  login(username: "example_user", password: "password") {
-    accessToken
+  login(loginInput: {
+    username: "example_user",
+    password: "password"
+  }) {
+    access_token
   }
 }
 ```
@@ -140,7 +155,7 @@ mutation {
 
 ```graphql
 mutation {
-  registerDomain(input: {
+  registerDomain(registerDomainInput: {
     name: "example.com",
     userId: 1,
     expirationDate: "2024-07-10",
@@ -162,7 +177,7 @@ mutation {
 
 ```graphql
 mutation {
-  updateDomain(id: "123456", input: {
+  updateDomain(id: "123456", updateDomainInput: {
     userId: 1,
     expirationDate: "2025-07-10",
     dnsRecords: ["ns1.updated-example.com", "ns2.updated-example.com"]
