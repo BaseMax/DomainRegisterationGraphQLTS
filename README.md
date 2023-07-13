@@ -278,7 +278,7 @@ This will execute the test suite and provide the test results.
 
 The project relies on the following dependencies:
 
-- `express`: Web framework for Node.js.
+- `nestjs`: Web framework for Node.js.
 - `graphql`: GraphQL implementation for JavaScript.
 - `graphql-tools`: Tools for building and manipulating GraphQL schemas.
 - `apollo-server-express`: Integration of Apollo Server with Express.
